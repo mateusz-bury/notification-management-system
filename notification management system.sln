@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33414.496
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System zarządzania błędami", "System zarządzania błędami.csproj", "{B666BA00-2965-449B-8F74-5C0C866AD78C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "notification management system", "notification management system.csproj", "{B666BA00-2965-449B-8F74-5C0C866AD78C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
