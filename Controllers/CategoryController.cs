@@ -30,9 +30,13 @@ namespace System_zarządzania_błędami.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(category obj)
         {
-            _db.Categories.Add(obj);
-            _db.SaveChanges();
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                _db.Categories.Add(obj);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(obj);
         }
     }
 }
