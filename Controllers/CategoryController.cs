@@ -38,6 +38,10 @@ namespace System_zarządzania_błędami.Controllers
             }
             return View(obj);
         }
+
+
+
+
         //GET
         public IActionResult Edit(int? id)
         {
@@ -46,8 +50,8 @@ namespace System_zarządzania_błędami.Controllers
                 return NotFound();
             }
             var categoryFromDb = _db.Categories.Find(id);
-            var categoryFromDbFirst = _db.Categories.FirstOrDefault(x => x.Id == id);
-            var categoryFromDbSingle = _db.Categories.SingleOrDefault(x => x.Id == id);
+            // var categoryFromDbFirst = _db.Categories.FirstOrDefault(x => x.Id == id);
+            // var categoryFromDbSingle = _db.Categories.SingleOrDefault(x => x.Id == id);
 
             if (categoryFromDb == null)
             {
@@ -55,6 +59,8 @@ namespace System_zarządzania_błędami.Controllers
             }
             return View(categoryFromDb);
         }
+
+
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -67,7 +73,7 @@ namespace System_zarządzania_błędami.Controllers
 
             if (ModelState.IsValid)
             {
-                _db.Categories.Add(obj);
+                _db.Categories.Update(obj);
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }
