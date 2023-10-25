@@ -25,24 +25,35 @@
 <table class="table table-bordered table-striped" style="width:100%">
     
     <thead>
-        <th>
-            Nazwa błędu
-        </th>
-        <th>
-            Opis błędu
-        </th>
+        <tr>
+            <th>
+                Nazwa błędu
+            </th>
+            <th>
+                Opis błędu
+            </th>
+            <th>
+
+            </th>
+        </tr>
     </thead>
     <tbody>
         @foreach(var obj in Model)
         {
-            <thead>
-                <th width="30%">
+            <tr>
+                <td width="20%">
                     @obj.Name
-                </th>
-                <th width="70%">
+                </td>
+                <td width="65%">
                     @obj.Description
-                </th>
-            </thead> 
+                </td>
+                <td width="15%" align="center"> 
+                    <div class="w-75 btn-group" role="group">
+                        <a asp-controller="category" asp-action="Edit" asp-route-id="@obj.Id"
+                           class="btn btn-warning"> Edycja<i class="bi bi-pencil"></i></a>
+                    </div>
+                </td>
+            </tr> 
         }
     </tbody>
 </table>

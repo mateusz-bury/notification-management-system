@@ -1,10 +1,10 @@
 ﻿@model category
 
 
-<form method="post">
+<form method="post" asp-action="Edit">
     <div class="border p-3 mt-4">
         <div class="row pb-2">
-            <h2 class="text-secondary">Lista zgłoszeń</h2>
+            <h2 class="text-secondary">Edycja zgłoszeń</h2>
             <hr/>
         </div>
         <div class="mb-3">
@@ -17,7 +17,7 @@
             <input asp-for="Description" class="form-control" />
             <span asp-validation-for="Description" class="text-danger"> </span>
         </div>
-        <button type="submit" class="btn btn-success" style="width:150px">Dodaj</button>
+        <button type="submit" class="btn btn-warning" style="width:150px">Aktualizuj</button>
         <a asp-controller="category" asp-action="Index" class="btn btn-secondary" style="width:150px">Powrót do listy</a>
     </div>
 </form>

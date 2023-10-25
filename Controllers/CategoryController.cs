@@ -38,5 +38,40 @@ namespace System_zarządzania_błędami.Controllers
             }
             return View(obj);
         }
+        //GET
+        public IActionResult Edit(int? id)
+        {
+            if (id==null || id==0)
+            {
+                return NotFound();
+            }
+            var categoryFromDb = _db.Categories.Find(id);
+            var categoryFromDbFirst = _db.Categories.FirstOrDefault(x => x.Id == id);
+            var categoryFromDbSingle = _db.Categories.SingleOrDefault(x => x.Id == id);
+
+            if (categoryFromDb == null)
+            {
+                return NotFound();
+            }
+            return View(categoryFromDb);
+        }
+        //POST
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(category obj)
+        {
+            if(obj.Name == obj.Description.ToString())
+            {
+                ModelState.AddModelError("name", "Opis jest niekompletny");
+            }
+
+            if (ModelState.IsValid)
+            {
+                _db.Categories.Add(obj);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(obj);
+        }
     }
 }
