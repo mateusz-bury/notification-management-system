@@ -3,32 +3,46 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index Category</h1>
+
+<div class="container p-3">
+    <div class="row p-4">
+        <div class="col-6">
+            <h2 class="text-body-secondary">Lista zgłoszeń</h2>
+
+        </div>
+
+        <div class="col-6 text-end">
+            <a asp-controller="category" asp-action="Create" class="btn btn-success">
+                <i class="bi bi-file-earmark-plus"></i> &nbsp; Dodaj nowe zgłoszenie
+            </a>
+
+        </div>
+
+    </div>
+</div>
 
 
 <table class="table table-bordered table-striped" style="width:100%">
     
     <thead>
         <th>
-            Category name
+            Nazwa błędu
         </th>
         <th>
-            Display Order
+            Opis błędu
         </th>
     </thead>
     <tbody>
         @foreach(var obj in Model)
         {
-            <tr>
-                <td width="50%">
+            <thead>
+                <th width="30%">
                     @obj.Name
-                </td>
-                <td width="30%">
-                    @obj.DisplayOrder
-                </td>
-            </tr>
-        
+                </th>
+                <th width="70%">
+                    @obj.Description
+                </th>
+            </thead> 
         }
     </tbody>
-
 </table>
