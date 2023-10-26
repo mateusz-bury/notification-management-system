@@ -20,6 +20,8 @@ namespace System_zarządzania_błędami.Controllers
             return View(objCategoryList);
         }
 
+        //CREATE
+
         //GET
         public IActionResult Create()
         {
@@ -39,13 +41,12 @@ namespace System_zarządzania_błędami.Controllers
             return View(obj);
         }
 
-
-
+        //EDIT
 
         //GET
         public IActionResult Edit(int? id)
         {
-            if (id==null || id==0)
+            if (id == null || id == 0)
             {
                 return NotFound();
             }
@@ -59,14 +60,12 @@ namespace System_zarządzania_błędami.Controllers
             }
             return View(categoryFromDb);
         }
-
-
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(category obj)
         {
-            if(obj.Name == obj.Description.ToString())
+            if (obj.Name == obj.Description.ToString())
             {
                 ModelState.AddModelError("name", "Opis jest niekompletny");
             }
@@ -78,6 +77,41 @@ namespace System_zarządzania_błędami.Controllers
                 return RedirectToAction("Index");
             }
             return View(obj);
+        }
+        
+        //DELETE
+        
+        //GET
+        public IActionResult Delete(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var categoryFromDb = _db.Categories.Find(id);
+            // var categoryFromDbFirst = _db.Categories.FirstOrDefault(x => x.Id == id);
+            // var categoryFromDbSingle = _db.Categories.SingleOrDefault(x => x.Id == id);
+
+            if (categoryFromDb == null)
+            {
+                return NotFound();
+            }
+            return View(categoryFromDb);
+        }
+        //POST
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeletePOST(int? id)
+        {
+            var obj = _db.Categories.Find(id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            
+                _db.Categories.Remove(obj);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
         }
     }
 }
