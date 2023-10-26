@@ -2,7 +2,7 @@
 
 namespace System_zarządzania_błędami.Models
 {
-    public class category
+    public class Category
     {
 
         [Key]

@@ -8,6 +8,6 @@ namespace System_zarządzania_błędami.Data;
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base (options)
         {
     }
-        public DbSet<category> Categories { get; set; }
+        public DbSet<Category> Categories { get; set; }
     }
 
