@@ -6,22 +6,17 @@ namespace System_zarządzania_błędami.Controllers
 {
     public class CategoryController : Controller
     {
-
         private readonly ApplicationDbContext _db;
-
         public CategoryController(ApplicationDbContext db)
         {
             _db = db;
         }
-
         public IActionResult Index()
         {
-            IEnumerable<category> objCategoryList = _db.Categories;
+            IEnumerable<Category> objCategoryList = _db.Categories;
             return View(objCategoryList);
         }
-
         //CREATE
-
         //GET
         public IActionResult Create()
         {
@@ -30,19 +25,18 @@ namespace System_zarządzania_błędami.Controllers
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(category obj)
+        public IActionResult Create(Category obj)
         {
             if (ModelState.IsValid)
             {
                 _db.Categories.Add(obj);
                 _db.SaveChanges();
+                TempData["add"] = "Dodano nowy wpis";
                 return RedirectToAction("Index");
             }
             return View(obj);
         }
-
         //EDIT
-
         //GET
         public IActionResult Edit(int? id)
         {
@@ -51,9 +45,6 @@ namespace System_zarządzania_błędami.Controllers
                 return NotFound();
             }
             var categoryFromDb = _db.Categories.Find(id);
-            // var categoryFromDbFirst = _db.Categories.FirstOrDefault(x => x.Id == id);
-            // var categoryFromDbSingle = _db.Categories.SingleOrDefault(x => x.Id == id);
-
             if (categoryFromDb == null)
             {
                 return NotFound();
@@ -63,7 +54,7 @@ namespace System_zarządzania_błędami.Controllers
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(category obj)
+        public IActionResult Edit(Category obj)
         {
             if (obj.Name == obj.Description.ToString())
             {
@@ -74,13 +65,12 @@ namespace System_zarządzania_błędami.Controllers
             {
                 _db.Categories.Update(obj);
                 _db.SaveChanges();
+                TempData["edit"] = "Wpis został wyedytowany";
                 return RedirectToAction("Index");
             }
             return View(obj);
         }
-        
         //DELETE
-        
         //GET
         public IActionResult Delete(int? id)
         {
@@ -89,9 +79,6 @@ namespace System_zarządzania_błędami.Controllers
                 return NotFound();
             }
             var categoryFromDb = _db.Categories.Find(id);
-            // var categoryFromDbFirst = _db.Categories.FirstOrDefault(x => x.Id == id);
-            // var categoryFromDbSingle = _db.Categories.SingleOrDefault(x => x.Id == id);
-
             if (categoryFromDb == null)
             {
                 return NotFound();
@@ -99,7 +86,7 @@ namespace System_zarządzania_błędami.Controllers
             return View(categoryFromDb);
         }
         //POST
-        [HttpPost]
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeletePOST(int? id)
         {
@@ -108,10 +95,10 @@ namespace System_zarządzania_błędami.Controllers
             {
                 return NotFound();
             }
-            
-                _db.Categories.Remove(obj);
-                _db.SaveChanges();
-                return RedirectToAction("Index");
+            _db.Categories.Remove(obj);
+            _db.SaveChanges();
+            TempData["remove"] = "Wpis usunięto";
+            return RedirectToAction("Index");
         }
     }
 }
