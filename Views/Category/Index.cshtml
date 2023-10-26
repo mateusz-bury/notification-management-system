@@ -2,25 +2,7 @@
 @{
     ViewData["Title"] = "Index";
 }
-
-@if (TempData["add"] != null)
-{
-    //<h2>@TempData["success"]</h2>
-    <div class="alert alert-dismissible alert-success">
-        <h4>Dodano nowy wpis!</h4>
-    </div>
-}else if(TempData["edit"] != null)
-{
-    <div class="alert alert-dismissible alert-warning">
-        <h4 class="alert-heading">Uwaga! Wpis został zmieniony</h4>
-    </div>
-}else if(TempData["remove"] != null)
-{
-    <div class="alert alert-dismissible alert-danger">    
-        <h4>Wpis został usunięty</h4>
-    </div>
-}
-
+<partial name="_Notifications"/>
 <div class="container p-3">
     <div class="row p-4">
         <div class="col-6">
