@@ -47,10 +47,15 @@
                 <td width="65%">
                     @obj.Description
                 </td>
-                <td width="15%" align="center"> 
+                <td width="15%" align="center">
                     <div class="w-75 btn-group" role="group">
                         <a asp-controller="category" asp-action="Edit" asp-route-id="@obj.Id"
                            class="btn btn-warning"> Edycja<i class="bi bi-pencil"></i></a>
+                    </div>
+
+                    <div class="w-75 btn-group" role="group">
+                        <a asp-controller="category" asp-action="Delete" asp-route-id="@obj.Id"
+                           class="btn btn-danger"> Usuń<i class="bi bi-trash3-fill"></i></a>
                     </div>
                 </td>
             </tr> 
