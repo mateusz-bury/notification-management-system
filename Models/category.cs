@@ -11,4 +11,10 @@ namespace System_zarządzania_błędami.Models
         public string Description { get; set; }
         public DateTime CreateDataTime { get; set; } = DateTime.Now;
     }
+
+    public class Lista
+    {
+       
+    }
 }
+
