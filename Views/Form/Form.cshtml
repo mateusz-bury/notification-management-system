@@ -1,0 +1,23 @@
+﻿@model Dane
+
+
+<form asp-action="Dane" method="post">
+    <div>
+        <label asp-for="Imie">Twoje imie</label>
+        <input asp-for="Imie" />
+    </div>
+    <div>
+        <label asp-for="Email">Twoj Email</label>
+        <input asp-for="Email" />
+    </div>
+    <div>
+        <label asp-for="Temat">Temat</label>
+        <input asp-for="Temat" />
+    </div>
+    <div>
+        <label asp-for="Tresc">Tresc</label>
+        <textarea asp-for="Tresc"></textarea>
+    </div>
+    <div>
+    </div>
+</form>
