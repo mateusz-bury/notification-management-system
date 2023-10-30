@@ -65,7 +65,7 @@ namespace System_zarządzania_błędami.Controllers
             {
                 _db.Categories.Update(obj);
                 _db.SaveChanges();
-                TempData["edit"] = "Wpis został wyedytowany";
+                TempData["edit"] = "Wpis został zaktualizowany";
                 return RedirectToAction("Index");
             }
             return View(obj);
