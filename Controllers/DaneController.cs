@@ -1,26 +1,25 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
 using System_zarządzania_błędami.Models;
 
-namespace System_zarządzania_błędami.Controllers
+public class DaneController : Controller
 {
-    public class DaneController : Controller
+    [HttpGet]
+    public ActionResult Contact()
     {
-        [HttpGet]
-        public IActionResult Form()
-        {
-            return View();
-        }
-        [HttpPost]
-        public IActionResult Form(Dane dane)
-        {
-            return View("Wynik", dane);
-        }
-        public IActionResult Wynik(Dane dane)
-        {
+        return View();
+    }
 
-            return View(dane);
-        }
+    [HttpPost]
+    public ActionResult SubmitForm(ContactFormModel model)
+    {
+        // Handle the form submission, e.g., send an email or save data to a database.
 
+        // Redirect to a thank you page or back to the form.
+        return RedirectToAction("ThankYou");
+    }
+
+    public ActionResult ThankYou()
+    {
+        return View();
     }
 }
