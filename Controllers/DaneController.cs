@@ -9,11 +9,11 @@ public class DaneController : Controller
         return View();
     }
     [HttpPost]
-    public IActionResult Form(Dane dane)
+    public IActionResult Form(DaneController dane)
     {
         return View("Wynik", dane);
     }
-    public IActionResult Wynik(Dane dane)
+    public IActionResult Wynik(DaneController dane)
     {
 
         return View(dane);
