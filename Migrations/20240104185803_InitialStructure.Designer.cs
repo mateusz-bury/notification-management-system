@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System_zarządzania_błędami.Data;
 
@@ -11,9 +12,11 @@ using System_zarządzania_błędami.Data;
 namespace System_zarządzania_błędami.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240104185803_InitialStructure")]
+    partial class InitialStructure
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,6 +38,9 @@ namespace System_zarządzania_błędami.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PrioritiesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PriorityId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -73,6 +79,9 @@ namespace System_zarządzania_błędami.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ErrorId")
+                        .HasColumnType("int");
+
                     b.Property<int>("ErrorsId")
                         .HasColumnType("int");
 
@@ -101,7 +110,13 @@ namespace System_zarządzania_błędami.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("ReportId")
+                        .HasColumnType("int");
+
                     b.Property<int>("ReportsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.Property<int>("UsersId")
@@ -124,12 +139,8 @@ namespace System_zarządzania_błędami.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsAdmin")
-                        .HasColumnType("bit");
+                    b.Property<int>("Email")
+                        .HasColumnType("int");
 
                     b.Property<string>("LastName")
                         .IsRequired()
