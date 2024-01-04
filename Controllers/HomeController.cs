@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System_zarządzania_błędami.Data;
 using System_zarządzania_błędami.Models;
 
 namespace System_zarządzania_błędami.Controllers
