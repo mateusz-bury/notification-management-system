@@ -1,0 +1,56 @@
+﻿@model System_zarządzania_błędami.Entities.Users
+
+@{
+    ViewData["Title"] = "Dodaj użytkownika";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form asp-action="AddUserController" asp-controller="AddUserController" method="post">
+                <div asp-validation-summary="All" class="alert alert-danger"></div>
+
+                <div class="form-group">
+                    <label asp-for="Name" class="col-form-label">Imię</label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="LastName" class="col-form-label">Nazwisko</label>
+                    <input asp-for="LastName" class="form-control" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Login" class="col-form-label">Login</label>
+                    <input asp-for="Login" class="form-control" />
+                    <span asp-validation-for="Login" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Password" class="col-form-label">Hasło</label>
+                    <input asp-for="Password" type="password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Email" class="col-form-label">Email</label>
+                    <input asp-for="Email" type="email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="IsAdmin" class="col-form-label">Administrator</label>
+                    <input asp-for="IsAdmin" type="checkbox" class="form-check-input" />
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block">Dodaj użytkownika</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
