@@ -6,26 +6,23 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace System_zarządzania_błędami.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialStructure : Migration
+    public partial class initializedatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AlterColumn<string>(
-                name: "Name",
-                table: "Categories",
-                type: "nvarchar(max)",
-                nullable: false,
-                oldClrType: typeof(string),
-                oldType: "nvarchar(100)");
-
-            migrationBuilder.AlterColumn<string>(
-                name: "Description",
-                table: "Categories",
-                type: "nvarchar(max)",
-                nullable: false,
-                oldClrType: typeof(string),
-                oldType: "nvarchar(300)");
+            migrationBuilder.CreateTable(
+                name: "Errors",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Errors", x => x.Id);
+                });
 
             migrationBuilder.CreateTable(
                 name: "Priorities",
@@ -50,32 +47,12 @@ namespace System_zarządzania_błędami.Migrations
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Login = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<int>(type: "int", nullable: false)
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsAdmin = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Errors",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PriorityId = table.Column<int>(type: "int", nullable: false),
-                    PrioritiesId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Errors", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Errors_Priorities_PrioritiesId",
-                        column: x => x.PrioritiesId,
-                        principalTable: "Priorities",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -88,8 +65,8 @@ namespace System_zarządzania_błędami.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SubmissionDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Status = table.Column<bool>(type: "bit", nullable: false),
-                    ErrorId = table.Column<int>(type: "int", nullable: false),
-                    ErrorsId = table.Column<int>(type: "int", nullable: false)
+                    ErrorsId = table.Column<int>(type: "int", nullable: false),
+                    PrioritiesId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -100,6 +77,12 @@ namespace System_zarządzania_błędami.Migrations
                         principalTable: "Errors",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Reports_Priorities_PrioritiesId",
+                        column: x => x.PrioritiesId,
+                        principalTable: "Priorities",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -108,8 +91,6 @@ namespace System_zarządzania_błędami.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ReportId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
                     ReportsId = table.Column<int>(type: "int", nullable: false),
                     UsersId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -131,14 +112,14 @@ namespace System_zarządzania_błędami.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Errors_PrioritiesId",
-                table: "Errors",
-                column: "PrioritiesId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Reports_ErrorsId",
                 table: "Reports",
                 column: "ErrorsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reports_PrioritiesId",
+                table: "Reports",
+                column: "PrioritiesId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserReports_ReportsId",
@@ -168,22 +149,6 @@ namespace System_zarządzania_błędami.Migrations
 
             migrationBuilder.DropTable(
                 name: "Priorities");
-
-            migrationBuilder.AlterColumn<string>(
-                name: "Name",
-                table: "Categories",
-                type: "nvarchar(100)",
-                nullable: false,
-                oldClrType: typeof(string),
-                oldType: "nvarchar(max)");
-
-            migrationBuilder.AlterColumn<string>(
-                name: "Description",
-                table: "Categories",
-                type: "nvarchar(300)",
-                nullable: false,
-                oldClrType: typeof(string),
-                oldType: "nvarchar(max)");
         }
     }
 }

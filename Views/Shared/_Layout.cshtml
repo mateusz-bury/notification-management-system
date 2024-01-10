@@ -32,7 +32,7 @@
 
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="Category" asp-action="Index">Lista zgłoszeń</a>
+                                <a class="nav-link" asp-controller="Reports" asp-action="Index">Lista zgłoszeń</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" asp-controller="Form" asp-action="Form">Formularz</a>
@@ -43,7 +43,7 @@
                                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Administracja</a>
 
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" asp-controller="Home">Urzytkownicy</a>
+                                        <a class="dropdown-item" asp-action="Index" asp-controller="AddUser">Użytkownicy</a>
                                         <a class="dropdown-item" asp-controller="Home">Ustawienia</a>
                                     </div>
                                 </li>

@@ -18,7 +18,7 @@ public class ApplicationDbContext : DbContext
         }
     }
 
-    public DbSet<Category> Categories { get; set; }
+    //public DbSet<Category> Categories { get; set; }
     public DbSet<Errors> Errors { get; set; }
     public DbSet<Priorities> Priorities { get; set; }
     public DbSet<Reports> Reports { get; set; }
