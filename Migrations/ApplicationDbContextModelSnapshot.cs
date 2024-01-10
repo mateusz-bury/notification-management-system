@@ -34,12 +34,7 @@ namespace System_zarządzania_błędami.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PrioritiesId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("PrioritiesId");
 
                     b.ToTable("Errors");
                 });
@@ -76,6 +71,9 @@ namespace System_zarządzania_błędami.Migrations
                     b.Property<int>("ErrorsId")
                         .HasColumnType("int");
 
+                    b.Property<int>("PrioritiesId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
 
@@ -89,6 +87,8 @@ namespace System_zarządzania_błędami.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ErrorsId");
+
+                    b.HasIndex("PrioritiesId");
 
                     b.ToTable("Reports");
                 });
@@ -152,41 +152,6 @@ namespace System_zarządzania_błędami.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("System_zarządzania_błędami.Models.Category", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreateDataTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Categories");
-                });
-
-            modelBuilder.Entity("System_zarządzania_błędami.Entities.Errors", b =>
-                {
-                    b.HasOne("System_zarządzania_błędami.Entities.Priorities", "Priorities")
-                        .WithMany()
-                        .HasForeignKey("PrioritiesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Priorities");
-                });
-
             modelBuilder.Entity("System_zarządzania_błędami.Entities.Reports", b =>
                 {
                     b.HasOne("System_zarządzania_błędami.Entities.Errors", "Errors")
@@ -195,7 +160,15 @@ namespace System_zarządzania_błędami.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("System_zarządzania_błędami.Entities.Priorities", "Priorities")
+                        .WithMany()
+                        .HasForeignKey("PrioritiesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Errors");
+
+                    b.Navigation("Priorities");
                 });
 
             modelBuilder.Entity("System_zarządzania_błędami.Entities.UserReports", b =>

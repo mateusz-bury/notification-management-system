@@ -12,8 +12,8 @@ using System_zarządzania_błędami.Data;
 namespace System_zarządzania_błędami.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240104185803_InitialStructure")]
-    partial class InitialStructure
+    [Migration("20240110214355_initialize-database")]
+    partial class initializedatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,15 +37,7 @@ namespace System_zarządzania_błędami.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PrioritiesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PriorityId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("PrioritiesId");
 
                     b.ToTable("Errors");
                 });
@@ -79,10 +71,10 @@ namespace System_zarządzania_błędami.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ErrorId")
+                    b.Property<int>("ErrorsId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ErrorsId")
+                    b.Property<int>("PrioritiesId")
                         .HasColumnType("int");
 
                     b.Property<bool>("Status")
@@ -99,6 +91,8 @@ namespace System_zarządzania_błędami.Migrations
 
                     b.HasIndex("ErrorsId");
 
+                    b.HasIndex("PrioritiesId");
+
                     b.ToTable("Reports");
                 });
 
@@ -110,13 +104,7 @@ namespace System_zarządzania_błędami.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ReportId")
-                        .HasColumnType("int");
-
                     b.Property<int>("ReportsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.Property<int>("UsersId")
@@ -139,8 +127,12 @@ namespace System_zarządzania_błędami.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Email")
-                        .HasColumnType("int");
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsAdmin")
+                        .HasColumnType("bit");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -163,41 +155,6 @@ namespace System_zarządzania_błędami.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("System_zarządzania_błędami.Models.Category", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreateDataTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Categories");
-                });
-
-            modelBuilder.Entity("System_zarządzania_błędami.Entities.Errors", b =>
-                {
-                    b.HasOne("System_zarządzania_błędami.Entities.Priorities", "Priorities")
-                        .WithMany()
-                        .HasForeignKey("PrioritiesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Priorities");
-                });
-
             modelBuilder.Entity("System_zarządzania_błędami.Entities.Reports", b =>
                 {
                     b.HasOne("System_zarządzania_błędami.Entities.Errors", "Errors")
@@ -206,7 +163,15 @@ namespace System_zarządzania_błędami.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("System_zarządzania_błędami.Entities.Priorities", "Priorities")
+                        .WithMany()
+                        .HasForeignKey("PrioritiesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Errors");
+
+                    b.Navigation("Priorities");
                 });
 
             modelBuilder.Entity("System_zarządzania_błędami.Entities.UserReports", b =>

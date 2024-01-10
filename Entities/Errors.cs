@@ -9,6 +9,6 @@ namespace System_zarządzania_błędami.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         //public int PriorityId { get; set; }
-        public Priorities Priorities { get; set; } // relacja jeden do wielu
+
     }
 }

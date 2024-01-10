@@ -37,8 +37,8 @@ namespace System_zarządzania_błędami.Controllers
                     return RedirectToAction("Index", "Home");
                 }
 
-                ModelState.AddModelError(string.Empty, "Nieprawidłowe dane logowania.");
             }
+            ModelState.AddModelError(string.Empty, "Nieprawidłowe dane logowania.");
 
             return View("Index", model);
         }
