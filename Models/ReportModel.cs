@@ -6,7 +6,6 @@ namespace System_zarządzania_błędami.Models
 {
     public class ReportModel
     {
-
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
@@ -23,6 +22,5 @@ namespace System_zarządzania_błędami.Models
         public string PriorityName { get; set; }
         public int SelectedErrorId { get; set; }
         public int SelectedPriorityId { get; set; }
-
     }
 }

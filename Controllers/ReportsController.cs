@@ -95,35 +95,35 @@ namespace System_zarządzania_błędami.Controllers
         //GET
         public IActionResult Edit(int? id)
         {
-            //if (id == null || id == 0)
-            //{
-            //    return NotFound();
-            //}
-            //var categoryFromDb = _db.Categories.Find(id);
-            //if (categoryFromDb == null)
-            //{
-            //    return NotFound();
-            //}
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var categoryFromDb = _db.Reports.Find(id);
+            if (categoryFromDb == null)
+            {
+                return NotFound();
+            }
             return View();
         }
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Category obj)
+        public IActionResult Edit(Reports model)
         {
-            if (obj.Name == obj.Description.ToString())
+            if (model.Title == model.Description?.ToString() || model.Title == null)
             {
-                ModelState.AddModelError("name", "Opis jest niekompletny");
+                ModelState.AddModelError("Title", "Opis jest niekompletny");
             }
 
-            //if (ModelState.IsValid)
-            //{
-            //    _db.Categories.Update(obj);
-            //    _db.SaveChanges();
-            //    TempData["edit"] = "Wpis został wyedytowany";
-            //    return RedirectToAction("Index");
-            //}
-            return View(obj);
+            if (ModelState.IsValid)
+            {
+                _db.Reports.Update(model);
+                _db.SaveChanges();
+                TempData["edit"] = "Wpis został wyedytowany";
+                return RedirectToAction("Index");
+            }
+            return View(model);
         }
         //DELETE
         //GET
@@ -133,11 +133,11 @@ namespace System_zarządzania_błędami.Controllers
             {
                 return NotFound();
             }
-            //var categoryFromDb = _db.Categories.Find(id);
-            //if (categoryFromDb == null)
-            //{
-            //    return NotFound();
-            //}
+            var categoryFromDb = _db.Reports.Find(id);
+            if (categoryFromDb == null)
+            {
+                return NotFound();
+            }
             return View();
         }
         //POST
@@ -145,14 +145,14 @@ namespace System_zarządzania_błędami.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeletePOST(int? id)
         {
-            //var obj = _db.Categories.Find(id);
-            //if (obj == null)
-            //{
-            //    return NotFound();
-            //}
-            //_db.Categories.Remove(obj);
-            //_db.SaveChanges();
-            //TempData["remove"] = "Wpis usunięto";
+            var obj = _db.Reports.Find(id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            _db.Reports.Remove(obj);
+            _db.SaveChanges();
+            TempData["remove"] = "Wpis usunięto";
             return RedirectToAction("Index");
         }
     }
