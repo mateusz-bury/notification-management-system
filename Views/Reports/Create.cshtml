@@ -1,0 +1,34 @@
+﻿@model ReportModel
+
+
+<form method="post">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-secondary">Lista zgłoszeń</h2>
+            <hr />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Title">Nazwa</label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"> </span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Description">Opis</label>
+            <input asp-for="Description" class="form-control" />
+            <span asp-validation-for="Description" class="text-danger"> </span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Errors">Kategoria usterki</label>
+            <select asp-for="SelectedErrorId" asp-items="@(new SelectList(Model.Errors, "Id", "Name"))" class="form-control"> </select>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Priorities">Priorytet</label>
+            <select asp-for="SelectedPriorityId" asp-items="@(new SelectList(Model.Priorities, "Id", "Name"))" class="form-control"> </select>
+        </div>
+
+        <button type="submit" class="btn btn-success" style="width:150px">Dodaj</button>
+        <a asp-controller="Reports" asp-action="Index" class="btn btn-secondary" style="width:150px">Powrót do listy</a>
+    </div>
+</form>
