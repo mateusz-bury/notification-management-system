@@ -11,7 +11,6 @@ namespace System_zarządzania_błędami.Models
         public string Description { get; set; }
         public DateTime SubmissionDate { get; set; }
         public bool Status { get; set; }
-
         [NotMapped]
         public List<Errors> Errors { get; set; }
         [NotMapped]

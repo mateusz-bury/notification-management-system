@@ -30,7 +30,7 @@ namespace System_zarządzania_błędami.Controllers
 
                 if (user != null && VerifyPassword(user, model.Password))
                 {
-                    // Zaloguj użytkownika
+                    // logowanie usera
                     HttpContext.Session.SetString("UserId", user.Id.ToString());
                     HttpContext.Session.SetString("IsAdmin", user.IsAdmin.ToString());
 

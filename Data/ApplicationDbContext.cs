@@ -9,7 +9,6 @@ public class ApplicationDbContext : DbContext
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
     }
-
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         if (!optionsBuilder.IsConfigured)
@@ -24,7 +23,5 @@ public class ApplicationDbContext : DbContext
     public DbSet<Reports> Reports { get; set; }
     public DbSet<UserReports> UserReports { get; set; }
     public DbSet<Users> Users { get; set; }
-
-
 }
 

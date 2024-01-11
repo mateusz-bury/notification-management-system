@@ -13,11 +13,8 @@ namespace System_zarządzania_błędami.Entities
         public bool Status { get; set; }
         public Errors Errors { get; set; }
         public ICollection<UserReports> UserReports { get; set; }
-
         public Priorities Priorities { get; set; } // relacja jeden do wielu
-
         public int ErrorsId { get; set; }
         public int PrioritiesId { get; set; }
-
     }
 }

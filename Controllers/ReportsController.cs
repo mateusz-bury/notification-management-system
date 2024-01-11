@@ -15,8 +15,6 @@ namespace System_zarządzania_błędami.Controllers
         }
         public IActionResult Index()
         {
-
-
             IEnumerable<ReportModel> model = _db.Reports.Select(a => new ReportModel()
             {
                 Id = a.Id,
@@ -30,9 +28,9 @@ namespace System_zarządzania_błędami.Controllers
                 PriorityName = a.Priorities.Name,
             });
 
-
             return View(model);
         }
+
         //CREATE
         //GET
         public IActionResult Create()
@@ -81,13 +79,8 @@ namespace System_zarządzania_błędami.Controllers
                 return RedirectToAction("Index");
             }
 
-
-
-
             model.Errors = _db.Errors.ToList();
             model.Priorities = _db.Priorities.ToList();
-
-
 
             return View(model);
         }

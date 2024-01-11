@@ -32,18 +32,18 @@ namespace System_zarządzania_błędami.Controllers
                     Name = newUser.Name,
                 };
 
-                // Dodaj nowego użytkownika do bazy danych
+                // dodanie nowego użytkownika do bazy danych
                 _context.Users.Add(userEntitie);
                 _context.SaveChanges();
 
-                // Dodatkowe czynności, jeśli są potrzebne (np. przekierowanie do innej strony)
+                // przekierowanie
                 return RedirectToAction("Index", "Home");
             }
             catch (Exception ex)
             {
-                // Obsługa błędów, np. logowanie
+                // Obsługa błędów
                 ModelState.AddModelError("", "Wystąpił błąd podczas dodawania użytkownika do bazy danych.");
-                return View(newUser); // Lub inny widok z błędem
+                return View(newUser);
             }
         }
 
@@ -69,7 +69,6 @@ namespace System_zarządzania_błędami.Controllers
 
             return View(model);
         }
-
 
         public IActionResult Edit(int? id)
         {
@@ -126,13 +125,5 @@ namespace System_zarządzania_błędami.Controllers
             }
             return View(model);
         }
-
-
     }
-
-
-
-
-
-
 }
